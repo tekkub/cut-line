@@ -9,3 +9,4 @@
 # https://atom.io/docs/latest/advanced/keymaps
 '.editor':
   'cmd-x': 'cut-line:cut-line'
+  'cmd-c': 'cut-line:copy-line'
