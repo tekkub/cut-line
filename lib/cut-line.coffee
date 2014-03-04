@@ -15,6 +15,7 @@ module.exports =
       atom.workspace.getActiveEditor().getCursor().setBufferPosition(@prevPos)
 
   selectLine: ->
+    @prevPos = null
     if @currentSelection().getText().length == 0
       @prevPos = atom.workspace.getActiveEditor().getCursor().getBufferPosition()
       atom.workspace.activePaneItem.selectLine()
