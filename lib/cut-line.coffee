@@ -19,7 +19,7 @@ module.exports =
     @editor = atom.workspace.getActiveEditor()
     if @currentSelection().getText().length == 0
       @prevPos = @editor.getCursor().getBufferPosition()
-      atom.workspace.activePaneItem.selectLine()
+      @editor.selectLine()
 
   currentSelection: ->
     return @editor.getSelection()
