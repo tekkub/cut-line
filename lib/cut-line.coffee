@@ -11,15 +11,22 @@ module.exports =
     @selectLine()
     @editor.copySelectedText()
     if @prevPos
-      @editor.getCursor().clearSelection()
-      @editor.getCursor().setBufferPosition(@prevPos)
+      for cursor in @prevPos
+        cursor[0].clearSelection()
+        cursor[0].setBufferPosition(cursor[1])
 
   selectLine: ->
     @prevPos = null
     @editor = atom.workspace.getActiveEditor()
-    if @currentSelection().getText().length == 0
-      @prevPos = @editor.getCursor().getBufferPosition()
+    cursors = @editor.getCursors()
+    if @selectionsAreEmpty()
+      @prevPos = ([cursor, cursor.getBufferPosition()] for cursor in cursors)
       @editor.selectLine()
 
   currentSelection: ->
     return @editor.getSelection()
+
+  selectionsAreEmpty: ->
+    for selection in @editor.getSelections()
+      return false unless selection.isEmpty()
+    true
