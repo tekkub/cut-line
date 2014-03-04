@@ -23,9 +23,6 @@ module.exports =
       @prevPos = ([cursor, cursor.getBufferPosition()] for cursor in cursors)
       @editor.selectLine()
 
-  currentSelection: ->
-    return @editor.getSelection()
-
   selectionsAreEmpty: ->
     for selection in @editor.getSelections()
       return false unless selection.isEmpty()
