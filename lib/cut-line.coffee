@@ -11,14 +11,15 @@ module.exports =
     @selectLine()
     @currentSelection().copy()
     if @prevPos
-      atom.workspace.getActiveEditor().getCursor().clearSelection()
-      atom.workspace.getActiveEditor().getCursor().setBufferPosition(@prevPos)
+      @editor.getCursor().clearSelection()
+      @editor.getCursor().setBufferPosition(@prevPos)
 
   selectLine: ->
     @prevPos = null
+    @editor = atom.workspace.getActiveEditor()
     if @currentSelection().getText().length == 0
-      @prevPos = atom.workspace.getActiveEditor().getCursor().getBufferPosition()
+      @prevPos = @editor.getCursor().getBufferPosition()
       atom.workspace.activePaneItem.selectLine()
 
   currentSelection: ->
-    return atom.workspace.getActiveEditor().getSelection()
+    return @editor.getSelection()
