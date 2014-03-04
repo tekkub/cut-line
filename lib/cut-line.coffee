@@ -5,11 +5,11 @@ module.exports =
 
   cutLine: ->
     @selectLine()
-    @currentSelection().cut()
+    @editor.cutSelectedText()
 
   copyLine: ->
     @selectLine()
-    @currentSelection().copy()
+    @editor.copySelectedText()
     if @prevPos
       @editor.getCursor().clearSelection()
       @editor.getCursor().setBufferPosition(@prevPos)
