@@ -7,6 +7,15 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.editor':
+'.pane.active .editor':
   'cmd-x': 'cut-line:cut-line'
   'cmd-c': 'cut-line:copy-line'
+
+# Active panel
+# .pane.active > .item-views > .editor > .scroll-view > .overlayer
+
+# Find in file input
+# .editor-container > .editor.mini.is-focused
+
+# Fuzzy file opener
+# .select-list.fuzzy-finder > .editor.mini
