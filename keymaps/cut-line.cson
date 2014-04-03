@@ -10,7 +10,8 @@
 '.pane.active .editor':
   'cmd-x': 'cut-line:cut-line'
   'cmd-c': 'cut-line:copy-line'
-
+  'cmd-v': 'cut-line:paste-line'
+  
 # Active panel
 # .pane.active > .item-views > .editor > .scroll-view > .overlayer
 
