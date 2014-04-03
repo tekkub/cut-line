@@ -34,8 +34,11 @@ module.exports =
         return elm != ""
       selections = @editor.getSelectionsOrderedByBufferPosition()
       if selections.length == 1
-        for line in clipLines
-          selections[0].insertText(line+"\n")
+        for line, i in clipLines
+          if i < clipLines.length-1
+            selections[0].insertText(line+"\n")
+          else
+            selections[0].insertText(line)
       else
         for selection, i in selections
           selection.insertText(clipLines[i] || clipLines[i%clipLines.length])
