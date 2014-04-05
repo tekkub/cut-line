@@ -3,6 +3,7 @@
   '.overlayer':
       'Copy line': 'cut-line:copy-line'
       'Cut line': 'cut-line:cut-line'
+      'Paste line': 'cut-line:paste-line'
 
 'menu': [
   {
@@ -12,6 +13,7 @@
       'submenu': [
         { 'label': 'Copy line', 'command': 'cut-line:copy-line' }
         { 'label': 'Cut line', 'command': 'cut-line:cut-line' }
+        { 'label': 'Paste line', 'command': 'cut-line:paste-line' }        
       ]
     ]
   }
