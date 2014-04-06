@@ -7,10 +7,10 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.pane.active .editor':
+'.pane.active > .item-views > .editor':
   'cmd-x': 'cut-line:cut-line'
   'cmd-c': 'cut-line:copy-line'
-
+  'cmd-v': 'cut-line:paste-line'
 # Active panel
 # .pane.active > .item-views > .editor > .scroll-view > .overlayer
 
