@@ -43,6 +43,8 @@ module.exports =
       else
         for selection, i in selections
           selection.insertText(clipLines[i] || clipLines[i%clipLines.length])
+    else
+      activeEditor.pasteText()
 
   selectLine: ->
     @prevPos = null
