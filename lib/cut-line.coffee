@@ -28,6 +28,7 @@ module.exports =
     if clipContents.metadata && clipContents.metadata.fullline && activeEditor
       activeEditor.insertNewlineAbove()
       activeEditor.moveCursorToBeginningOfLine()
+      activeEditor.deleteToEndOfWord()
       cursors = activeEditor.getCursors()
       cursors = cursors.sort (a,b) -> return if a.getBufferRow() > b.getBufferRow() then 1 else -1
       clipLines = clipContents.text.split("\n")
