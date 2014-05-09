@@ -30,10 +30,12 @@ module.exports =
       activeEditor.moveCursorToBeginningOfLine()
       activeEditor.deleteToEndOfWord()
       cursors = activeEditor.getCursors()
-      cursors = cursors.sort (a,b) -> return if a.getBufferRow() > b.getBufferRow() then 1 else -1
+      cursors = cursors.sort (a,b) ->
+        if a.getBufferRow() > b.getBufferRow() then 1 else -1
+
       clipLines = clipContents.text.split("\n")
-      clipLines = clipLines.filter (elm) ->
-        return elm != ""
+      clipLines = clipLines.filter (elm) -> elm != ""
+
       selections = activeEditor.getSelectionsOrderedByBufferPosition()
       if selections.length == 1
         for line, i in clipLines
