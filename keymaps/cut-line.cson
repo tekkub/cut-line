@@ -1,21 +1,9 @@
-# Keybindings require three things to be fully defined: A selector that is
-# matched against the focused element, the keystroke and the command to
-# execute.
-#
-# Below is a basic keybinding which registers on all platforms by applying to
-# the root workspace element.
-
-# For more detailed documentation see
-# https://atom.io/docs/latest/advanced/keymaps
-'.pane.active > .item-views > .editor':
+'.platform-darwin .pane.active > .item-views > .editor':
   'cmd-x': 'cut-line:cut-line'
   'cmd-c': 'cut-line:copy-line'
   'cmd-v': 'cut-line:paste-line'
-# Active panel
-# .pane.active > .item-views > .editor > .scroll-view > .overlayer
 
-# Find in file input
-# .editor-container > .editor.mini.is-focused
-
-# Fuzzy file opener
-# .select-list.fuzzy-finder > .editor.mini
+'.platform-linux .pane.active > .item-views > .editor':
+  'ctrl-c': 'cut-line:copy-line'
+  'ctrl-x': 'cut-line:cut-line'
+  'ctrl-v': 'cut-line:paste-line'
