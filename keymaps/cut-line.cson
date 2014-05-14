@@ -7,3 +7,8 @@
   'ctrl-c': 'cut-line:copy-line'
   'ctrl-x': 'cut-line:cut-line'
   'ctrl-v': 'cut-line:paste-line'
+
+'.platform-win32 .pane.active > .item-views > .editor':
+  'ctrl-c': 'cut-line:copy-line'
+  'ctrl-x': 'cut-line:cut-line'
+  'ctrl-v': 'cut-line:paste-line'
