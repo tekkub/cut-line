@@ -23,20 +23,18 @@ module.exports =
         cursor[0].setBufferPosition(cursor[1])
 
   pasteLine: ->
+    @editor = atom.workspace.getActiveEditor()
     clipContents = atom.clipboard.readWithMetadata()
-    activeEditor = atom.workspace.getActiveEditor()
-    if clipContents.metadata && clipContents.metadata.fullline && activeEditor
-      activeEditor.insertNewlineAbove()
-      activeEditor.moveCursorToBeginningOfLine()
-      activeEditor.deleteToEndOfWord()
-      cursors = activeEditor.getCursors()
-      cursors = cursors.sort (a,b) ->
-        if a.getBufferRow() > b.getBufferRow() then 1 else -1
+    if clipContents.metadata && clipContents.metadata.fullline
+      @editor.insertNewlineAbove()
+      @editor.moveCursorToBeginningOfLine()
+      @editor.deleteToEndOfWord()
+      cursors = @getSortedCursors()
 
       clipLines = clipContents.text.split("\n")
       clipLines = clipLines.filter (elm) -> elm != ""
 
-      selections = activeEditor.getSelectionsOrderedByBufferPosition()
+      selections = @editor.getSelectionsOrderedByBufferPosition()
       if selections.length == 1
         for line, i in clipLines
           if i < clipLines.length-1
@@ -47,7 +45,11 @@ module.exports =
         for selection, i in selections
           selection.insertText(clipLines[i] || clipLines[i%clipLines.length])
     else
-      activeEditor.pasteText()
+      @editor.pasteText()
+
+  getSortedCursors: ->
+    @editor.getCursors().sort (a,b) ->
+      if a.getBufferRow() > b.getBufferRow() then 1 else -1
 
   selectLine: ->
     @prevPos = null
