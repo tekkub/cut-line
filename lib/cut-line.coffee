@@ -26,22 +26,23 @@ module.exports =
     @editor = atom.workspace.getActiveEditor()
     clipContents = atom.clipboard.readWithMetadata()
     if clipContents.metadata && clipContents.metadata.fullline
-      @insertBlankLine()
-      cursors = @getSortedCursors()
+      @editor.transact =>
+        @insertBlankLine()
+        cursors = @getSortedCursors()
 
-      clipLines = clipContents.text.split("\n")
-      clipLines = clipLines.filter (elm) -> elm != ""
+        clipLines = clipContents.text.split("\n")
+        clipLines = clipLines.filter (elm) -> elm != ""
 
-      selections = @editor.getSelectionsOrderedByBufferPosition()
-      if selections.length == 1
-        for line,i in clipLines
-          if i < clipLines.length-1
-            selections[0].insertText(line+"\n")
-          else
-            selections[0].insertText(line)
-      else
-        for selection,i in selections
-          selection.insertText(clipLines[i] || clipLines[i%clipLines.length])
+        selections = @editor.getSelectionsOrderedByBufferPosition()
+        if selections.length == 1
+          for line,i in clipLines
+            if i < clipLines.length-1
+              selections[0].insertText(line+"\n")
+            else
+              selections[0].insertText(line)
+        else
+          for selection,i in selections
+            selection.insertText(clipLines[i] || clipLines[i%clipLines.length])
     else
       @editor.pasteText()
 
