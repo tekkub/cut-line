@@ -26,9 +26,7 @@ module.exports =
     @editor = atom.workspace.getActiveEditor()
     clipContents = atom.clipboard.readWithMetadata()
     if clipContents.metadata && clipContents.metadata.fullline
-      @editor.insertNewlineAbove()
-      @editor.moveCursorToBeginningOfLine()
-      @editor.deleteToEndOfWord()
+      @insertBlankLine()
       cursors = @getSortedCursors()
 
       clipLines = clipContents.text.split("\n")
@@ -46,6 +44,22 @@ module.exports =
           selection.insertText(clipLines[i] || clipLines[i%clipLines.length])
     else
       @editor.pasteText()
+
+  insertBlankLine: ->
+    cursors = @getSortedCursors()
+    firstCursor = cursors[0]
+    onFirstLine = firstCursor.getBufferRow() is 0
+
+    @editor.moveCursorToBeginningOfLine()
+    @editor.moveCursorLeft()
+    @editor.insertNewline()
+
+    if onFirstLine
+      firstCursor.moveUp()
+      firstCursor.moveToEndOfLine()
+
+    for cursor in cursors
+      @editor.setIndentationForBufferRow(cursor.getBufferRow(), 0)
 
   getSortedCursors: ->
     @editor.getCursors().sort (a,b) ->
