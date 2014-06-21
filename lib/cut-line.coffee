@@ -23,8 +23,8 @@ module.exports =
         cursor[0].setBufferPosition(cursor[1])
 
   pasteLine: ->
-    clipContents = atom.clipboard.readWithMetadata();
-    activeEditor = atom.workspace.getActiveEditor();
+    clipContents = atom.clipboard.readWithMetadata()
+    activeEditor = atom.workspace.getActiveEditor()
     if clipContents.metadata && clipContents.metadata.fullline && activeEditor
       activeEditor.insertNewlineAbove()
       activeEditor.moveCursorToBeginningOfLine()
@@ -57,7 +57,7 @@ module.exports =
       @prevPos = ([cursor, cursor.getBufferPosition()] for cursor in cursors)
       @editor.selectLine()
       @editor.selections = @editor.getSelectionsOrderedByBufferPosition()
-      return true;
+      return true
 
   selectionsAreEmpty: ->
     for selection in @editor.getSelections()
