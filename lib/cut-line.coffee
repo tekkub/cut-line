@@ -34,13 +34,13 @@ module.exports =
 
       selections = @editor.getSelectionsOrderedByBufferPosition()
       if selections.length == 1
-        for line, i in clipLines
+        for line,i in clipLines
           if i < clipLines.length-1
             selections[0].insertText(line+"\n")
           else
             selections[0].insertText(line)
       else
-        for selection, i in selections
+        for selection,i in selections
           selection.insertText(clipLines[i] || clipLines[i%clipLines.length])
     else
       @editor.pasteText()
@@ -48,7 +48,7 @@ module.exports =
   insertBlankLine: ->
     cursors = @getSortedCursors()
     firstCursor = cursors[0]
-    onFirstLine = firstCursor.getBufferRow() is 0
+    onFirstLine = firstCursor.getBufferRow() == 0
 
     @editor.moveCursorToBeginningOfLine()
     @editor.moveCursorLeft()
