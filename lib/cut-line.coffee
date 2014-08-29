@@ -24,21 +24,21 @@ module.exports =
 
   pasteLine: ->
     @editor = atom.workspace.getActiveEditor()
-    @eol = @editor.getBuffer().lineEndingForRow(0)
+    eol = @editor.getBuffer().lineEndingForRow(0)
     clipContents = atom.clipboard.readWithMetadata()
     if clipContents.metadata && clipContents.metadata.fullline
       @editor.transact =>
         @insertBlankLine()
         cursors = @getSortedCursors()
 
-        clipLines = clipContents.text.split(@eol)
+        clipLines = clipContents.text.split(eol)
         clipLines = clipLines.filter (elm) -> elm != ""
 
         selections = @editor.getSelectionsOrderedByBufferPosition()
         if selections.length == 1
           for line,i in clipLines
             if i < clipLines.length-1
-              selections[0].insertText(line+@eol)
+              selections[0].insertText(line+eol)
             else
               selections[0].insertText(line)
         else
