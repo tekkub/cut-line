@@ -6,10 +6,14 @@ module.exports =
 
   cutLine: ->
     fullline = @selectLine()
-    @editor.cutSelectedText()
-    if fullline
-      atom.clipboard.metadata = atom.clipboard.metadata || {}
-      atom.clipboard.metadata.fullline = true
+    lineIsEmpty = fullline && /^\s+$/.test(@editor.getSelectedText())
+    if lineIsEmpty
+      @editor.delete()
+    else
+      @editor.cutSelectedText()
+      if fullline
+        atom.clipboard.metadata = atom.clipboard.metadata || {}
+        atom.clipboard.metadata.fullline = true
 
   copyLine: ->
     fullline = @selectLine()
