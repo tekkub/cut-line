@@ -1,8 +1,8 @@
 module.exports =
   activate: ->
-    atom.workspaceView.command "cut-line:cut-line", => @cutLine()
-    atom.workspaceView.command "cut-line:copy-line", => @copyLine()
-    atom.workspaceView.command "cut-line:paste-line", => @pasteLine()
+    atom.views.getView(atom.workspace).command "cut-line:cut-line", => @cutLine()
+    atom.views.getView(atom.workspace).command "cut-line:copy-line", => @copyLine()
+    atom.views.getView(atom.workspace).command "cut-line:paste-line", => @pasteLine()
 
   cutLine: ->
     fullline = @selectLine()
